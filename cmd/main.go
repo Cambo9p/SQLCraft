@@ -8,7 +8,7 @@ import (
 	"github.com/cambo9p/SQLCraft/database"
 	"github.com/cambo9p/SQLCraft/internal/handlers"
 	"github.com/gofiber/fiber/v2"
-	_ "github.com/lib/pq"
+	 _ "github.com/lib/pq"
 )
 
 func main() {
