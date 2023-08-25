@@ -20,7 +20,7 @@ func (d *DatabaseImpl) Query(query string, args ...interface{}) (*sql.Rows, erro
 }
 
 // returns the query result in the form of a tabledata dao 
-// puts the rows from the 
+// TODO - i think there will be a lot of overlap between this and get table data
 func (d *DatabaseImpl) GetQueryData(query string, args ...interface{}) (dao.TableData, error) {
   var tabledata dao.TableData
   // table name can be anything i suppose since its a query result
@@ -45,6 +45,10 @@ func (d *DatabaseImpl) GetQueryData(query string, args ...interface{}) (dao.Tabl
 
   return tabledata, nil
 }
+
+// gets the view for the specific table  -- may not need this as the query one has all funcrtoinality
+// func (d *DatabaseImpl) GetTableData(query string, args ...interface{}) (*sql.Rows, error) {
+// }
 
 // creates a new table -- TODO 
 func (d *DatabaseImpl) InsertTable(query string, args ...interface{}) error {
