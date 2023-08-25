@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/cambo9p/SQLCraft/database"
 	"github.com/cambo9p/SQLCraft/internal/handlers"
 	"github.com/gofiber/fiber/v2"
-  _ "github.com/lib/pq"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -18,11 +19,14 @@ func main() {
     log.Fatal(err)
   }
   defer db.Close()
+
   rows, err := db.Query("SELECT * FROM users")
   if err != nil {
     panic(err)
   }
   defer rows.Close()
+
+  dbInstance := database.NewDatabase(db)
 
   // Iterate over the results
   for rows.Next() {
@@ -38,7 +42,7 @@ func main() {
   // set up fiber app
   app := fiber.New()
 
-  handlers.InitAPIRoutes(app)
+  handlers.InitAPIRoutes(app, dbInstance)
 
   app.Static("/", "./static")
   app.Static("/home", "./static/home.html")
