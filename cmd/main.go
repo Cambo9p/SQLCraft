@@ -1,11 +1,14 @@
 package main
 
 import (
-  "github.com/gofiber/fiber/v2"
+	"github.com/cambo9p/SQLCraft/internal/handlers"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
   app := fiber.New()
+
+  handlers.InitAPIRoutes(app)
 
   app.Static("/", "./static")
   app.Static("/home", "./static/home.html")
