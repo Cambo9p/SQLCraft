@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 )
 
-
 type TableData struct {
   TableName string          `json:"table"`
   Columns   []string        `json:"columns"`

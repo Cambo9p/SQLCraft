@@ -22,7 +22,6 @@ func sendMessage(c *fiber.Ctx) error {
   return c.SendString("ooga booga it worked")
 }
 
-
 // example api call for teh user table 
 func sendCurrUserTable(c *fiber.Ctx) error {
   query := "select * from users"
