@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/cambo9p/SQLCraft/database"
+	"github.com/cambo9p/SQLCraft/internal/dao"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -22,24 +23,19 @@ func sendMessage(c *fiber.Ctx) error {
 
 func sendCurrUserTable(c *fiber.Ctx) error {
 
-  rows, err := apiDb.Query("SELECT * FROM users")
+  query := "select * from users"
+  tableData, err := apiDb.GetQueryData(query)
   if err != nil {
-    log.Fatal("fucked the query")
+    println(err.Error())
+    log.Fatal("oh shit ")
   }
+  println(tableData.TableName)
 
-  // send as json ? 
-  names := ""
-
-  for rows.Next() {
-    var id int
-    var name string
-    var dob string
-    err := rows.Scan(&id, &name, &dob)
-    if err != nil {
-        panic(err)
-    }
-    names += name
+  jsonData, err := dao.MarshalTableData(tableData)
+  if err != nil {
+    return err
   }
-
-  return c.SendString(names)
+  
+  c.Type("application/json")
+  return c.Send(jsonData)
 }

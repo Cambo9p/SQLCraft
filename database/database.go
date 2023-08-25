@@ -1,9 +1,14 @@
 package database
 
+import (
 
-import "database/sql"
+	"github.com/cambo9p/SQLCraft/internal/dao"
+)
 
 type Database interface {
-  Query(query string, args ...interface{}) (*sql.Rows, error)
+  GetQueryData(query string, args ...interface{}) (dao.TableData, error)
+  InsertTable(query string, args ...interface{}) error
+  InsertData(query string, args ...interface{}) error
+  // Query(query string, args ...interface{}) (*sql.Rows, error)
 }
 
