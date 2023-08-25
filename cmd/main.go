@@ -2,7 +2,7 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
+	// "fmt"
 	"log"
 
 	"github.com/cambo9p/SQLCraft/database"
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-  // con to db 
+  // connect to db 
   connStr := "user=postgres dbname=postgres password=newpassword sslmode=disable"
   db, err := sql.Open("postgres", connStr)
   if err != nil {
@@ -20,25 +20,8 @@ func main() {
   }
   defer db.Close()
 
-  rows, err := db.Query("SELECT * FROM users")
-  if err != nil {
-    panic(err)
-  }
-  defer rows.Close()
-
   dbInstance := database.NewDatabase(db)
-
-  // Iterate over the results
-  for rows.Next() {
-    var id int
-    var name string
-    var dob string
-    err := rows.Scan(&id, &name, &dob)
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println(id, name)
-  }
+  
   // set up fiber app
   app := fiber.New()
 
