@@ -46,11 +46,13 @@ func (d *DatabaseImpl) GetQueryData(query string, args ...interface{}) (dao.Tabl
   return tabledata, nil
 }
 
+// creates a new table -- TODO 
 func (d *DatabaseImpl) InsertTable(query string, args ...interface{}) error {
   
   return nil
 }
 
+// inserts data into a table -- TODO
 func (d *DatabaseImpl) InsertData(query string, args ...interface{}) error {
 
   return nil
